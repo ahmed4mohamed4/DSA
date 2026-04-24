@@ -88,6 +88,51 @@ void remove_at (Array &arr, int index) {
     }
 }
 
+int linear_search (Array &arr, int key) {
+    // Best case: O(1) (if the key is at the first position)
+    // Worst case: O(n)
+    /*
+        Average case: 
+            1 + 2 + 3 + 4 + ... + n / n
+            (n (n + 1) / 2) / n
+            (n + 1) / 2
+            O((n + 1) / 2)
+    */
+    for (int i = 0; i < arr.length; i++) {
+        if (arr.A [i] == key) return i;
+    }
+    return -1;
+}
+
+void swap (int &x, int &y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}
+
+int improve_linear_seach_transposition (Array &arr, int key) {
+    for (int i = 0; i < arr.length; i++) {
+        if (arr.A [i] == key) {
+            if (i > 0) {
+                swap (arr.A [i], arr.A [i - 1]); // Transposition
+                return i - 1;
+            }
+            return i;
+        }
+    }
+    return -1;
+}
+
+int improve_linear_seach_move_to_front (Array &arr, int key) {
+    for (int i = 0; i < arr.length; i++) {
+        if (arr.A [i] == key) {
+            swap (arr.A [i], arr.A [0]); // Move to front
+            return 0;
+        }
+    }
+    return -1;
+}
+
 void print_separator () { cout << "\n===========================\n";}
 
 int main () {
@@ -130,6 +175,42 @@ int main () {
     remove_at (arr, 2);
 
     display (arr);
+
+    print_separator ();
+
+    int the_search = linear_search (arr, 13);
+
+    if (the_search == -1) {
+        cout << "Not Found\n";
+    }
+    else {
+        cout << "At the index: " << the_search << '\n';
+    }
+
+    print_separator ();
+
+    int the_search2 = improve_linear_seach_transposition (arr, 13);
+
+    if (the_search2 == -1) {
+        cout << "Not Found\n";
+    }
+    else {
+        cout << "At the index: " << the_search2 << '\n';
+    }
+
+    print_separator ();
+
+
+    int the_search3 = improve_linear_seach_move_to_front (arr, 13);
+
+    if (the_search3 == -1) {
+        cout << "Not Found\n";
+    }
+    else {
+        cout << "At the index: " << the_search3 << '\n';
+    }
+
+    print_separator ();
 
     delete [] arr.A;
 
