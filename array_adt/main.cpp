@@ -15,7 +15,7 @@ void display (Array &arr) {
     cout << endl;
 }
 
-void append (Array &arr, int element) {
+void append (Array &arr, const int element) {
     /*
         - we can add new element at the end of the array if there is space available.
     */
@@ -29,7 +29,7 @@ void append (Array &arr, int element) {
     }
 }
 
-void insert (Array &arr, int index, int v) {
+void insert (Array &arr, const int index, const int v) {
     /*
         - We can insert an element if the index is between 0 and the length of the array (inclusive).
         - We can insert an element if the length of the array is less than its size.
@@ -64,7 +64,7 @@ void pop (Array &arr) { // O(1)
     }
 }
 
-void remove_at (Array &arr, int index) {
+void remove_at (Array &arr, const int index) {
 
     // Best case: O(1) (removing the last element)
     // Worst case: O(n) 
@@ -88,7 +88,7 @@ void remove_at (Array &arr, int index) {
     }
 }
 
-int linear_search (Array &arr, int key) {
+int linear_search (Array &arr, const int key) {
     // Best case: O(1) (if the key is at the first position)
     // Worst case: O(n)
     /*
@@ -110,7 +110,7 @@ void swap (int &x, int &y) {
     y = temp;
 }
 
-int improve_linear_seach_transposition (Array &arr, int key) {
+int improve_linear_seach_transposition (Array &arr, const int key) {
     for (int i = 0; i < arr.length; i++) {
         if (arr.A [i] == key) {
             if (i > 0) {
@@ -123,7 +123,7 @@ int improve_linear_seach_transposition (Array &arr, int key) {
     return -1;
 }
 
-int improve_linear_seach_move_to_front (Array &arr, int key) {
+int improve_linear_seach_move_to_front (Array &arr, const int key) {
     for (int i = 0; i < arr.length; i++) {
         if (arr.A [i] == key) {
             swap (arr.A [i], arr.A [0]); // Move to front
@@ -133,7 +133,7 @@ int improve_linear_seach_move_to_front (Array &arr, int key) {
     return -1;
 }
 
-int binary_search (Array &arr, int key) {
+int binary_search (Array &arr, const int key) {
     int low = 0;
     int high = arr.length - 1;
     int mid = 0;
@@ -151,6 +151,24 @@ int binary_search (Array &arr, int key) {
         }
         else {
             high = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
+int binary_search_using_recursion (Array &arr, const int key, int low, int high) {
+    int mid = (low + high) / 2;
+
+    if (low <= high) {
+        if (arr.A [mid] == key) {
+            return mid;
+        }
+        else if (arr.A [mid] > key) {
+            return binary_search_using_recursion (arr, key, low, mid - 1);
+        }
+        else {
+            return binary_search_using_recursion (arr, key, mid + 1, high);
         }
     }
 
@@ -246,6 +264,17 @@ int main () {
         cout << "Value 27 found at index " << x << ".\n";
     }
 
+    print_separator ();
+
+    cout << "Binary search using recursion for value 32:\n";
+    int y = binary_search_using_recursion(ar, 32, 0, ar.length - 1);
+    if (y == -1) {
+        cout << "Value 32 not found.\n";
+    } else {
+        cout << "Value 32 found at index " << y << ".\n";
+    }
+
     delete[] arr.A;
+    
     return 0;
 }
