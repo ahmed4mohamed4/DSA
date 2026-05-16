@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -7,6 +8,10 @@ struct Array {
     int size;
     int length;
 };
+
+bool is_valid_index (const Array &arr, int index) {
+    return index >= 0 && index < arr.length;
+}
 
 void display (Array &arr) {
     for (int i = 0; i < arr.length; i++) { // O(n)
@@ -133,7 +138,7 @@ int improve_linear_seach_move_to_front (Array &arr, const int key) {
     return -1;
 }
 
-int binary_search (Array &arr, const int key) {
+int binary_search (Array &arr, const int key) { // O(log(n + 1)) => O(log n)
     int low = 0;
     int high = arr.length - 1;
     int mid = 0;
@@ -173,6 +178,81 @@ int binary_search_using_recursion (Array &arr, const int key, int low, int high)
     }
 
     return -1;
+}
+
+int get (const Array &arr, const int index) {
+    if (is_valid_index(arr, index)) {
+        return arr.A [index];
+    }
+    else {
+        cout << "Index out of range.\n";
+        return 0;
+    }
+}
+
+void set_value (Array &arr, const int value, const int index) {
+    if (is_valid_index(arr, index)) {
+        arr.A [index] = value;
+    }
+    else {
+        cout << "Index out of range.\n";
+    }
+}
+
+int max_value (const Array &arr) {
+    if (arr.length) {
+        int max_element = arr.A [0];
+        for (int i = 1; i < arr.length; i++) {
+            max_element = std::max(max_element, arr.A [i]);
+        }
+        return max_element;
+    }
+    else {
+        cout << "Empty array.\n";
+        return 0;
+    }
+}
+
+int min_value (const Array &arr) {
+    if (arr.length) {
+        int min_element = arr.A [0];
+        for (int i = 1; i < arr.length; i++) {
+            min_element = std::min (min_element, arr.A [i]);
+        }
+        return min_element;
+    }
+    else {
+        cout << "Empty array.\n";
+        return 0;
+    }
+}
+
+int sum_values (const Array &arr) {
+    int total = 0;
+
+    for (int i = 0; i < arr.length; ++i) {
+        total += arr.A [i];
+    }
+
+    return total;
+} 
+
+int sum_values_with_recursion (const Array &arr, int n) {
+    if (n < 0) {
+        return 0;
+    }
+    
+    return sum_values_with_recursion (arr, n - 1) + arr.A [n];
+}
+
+double avg (const Array &arr) {
+    if (arr.length) {
+        return (double) sum_values (arr) / arr.length;
+    }
+    else {
+        cout << "Empty array.\n";
+        return 0.0;
+    }
 }
 
 void print_separator () { cout << "\n===========================\n";}
@@ -274,7 +354,52 @@ int main () {
         cout << "Value 32 found at index " << y << ".\n";
     }
 
+    print_separator ();
+
+    cout << "Testing max_value function:\n";
+    int max_val = max_value(ar);
+    cout << "Maximum value in array: " << max_val << ".\n";
+
+    print_separator();
+
+    cout << "Testing min_value function:\n";
+    int min_val = min_value(ar);
+    cout << "Minimum value in array: " << min_val << ".\n";
+
+    print_separator();
+
+    cout << "Testing sum_values function:\n";
+    int sum_val = sum_values(ar);
+    cout << "Sum of all values: " << sum_val << ".\n";
+
+    print_separator();
+
+    cout << "Testing sum_values_with_recursion function:\n";
+    int sum_recursive = sum_values_with_recursion(ar, ar.length - 1);
+    cout << "Sum of all values (recursive): " << sum_recursive << ".\n";
+
+    print_separator();
+
+    cout << "Testing avg function:\n";
+    double average = avg(ar);
+    cout << "Average of all values: " << average << ".\n";
+
+    print_separator();
+
+    cout << "Testing get function for index 1:\n";
+    int get_val = get(ar, 1);
+    cout << "Value at index 1: " << get_val << ".\n";
+
+    print_separator();
+
+    cout << "Testing set_value function to set index 0 to 99:\n";
+    set_value(ar, 99, 0);
+    display(ar);
+
+    print_separator();
+
     delete[] arr.A;
-    
+    delete[] ar.A;
+
     return 0;
 }
