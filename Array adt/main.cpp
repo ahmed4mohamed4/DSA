@@ -115,7 +115,7 @@ void swap (int &x, int &y) {
     y = temp;
 }
 
-int improve_linear_seach_transposition (Array &arr, const int key) {
+int improve_linear_search_transposition (Array &arr, const int key) {
     for (int i = 0; i < arr.length; i++) {
         if (arr.A [i] == key) {
             if (i > 0) {
@@ -128,7 +128,7 @@ int improve_linear_seach_transposition (Array &arr, const int key) {
     return -1;
 }
 
-int improve_linear_seach_move_to_front (Array &arr, const int key) {
+int improve_linear_search_move_to_front (Array &arr, const int key) {
     for (int i = 0; i < arr.length; i++) {
         if (arr.A [i] == key) {
             swap (arr.A [i], arr.A [0]); // Move to front
@@ -255,6 +255,37 @@ double avg (const Array &arr) {
     }
 }
 
+void reverse_array (Array &arr) { // O(2n) => O(n)
+    Array a;
+    a.size = arr.size;
+    a.length = arr.length;
+    a.A = new int [a.size];
+
+    for (
+        int i = arr.length - 1, j = 0;
+        i >= 0;
+        i--, j++
+    ) {
+        a.A [j] = arr.A [i];
+    }
+
+    for (int i = 0; i < arr.length; i++) {
+        arr.A [i] = a.A [i];
+    }
+}
+
+void reverse_array_with_direct_swap (Array &arr) { // O(n)
+
+    for (
+        int i = 0, j = arr.length - 1;
+        i < j;
+        i++, j--
+    ) {
+        swap (arr.A [i], arr.A [j]);
+    }
+
+}
+
 void print_separator () { cout << "\n===========================\n";}
 
 int main () {
@@ -312,7 +343,7 @@ int main () {
     print_separator();
 
     cout << "Improved linear search (transposition) for value 13:\n";
-    int the_search2 = improve_linear_seach_transposition(arr, 13);
+    int the_search2 = improve_linear_search_transposition(arr, 13);
     if (the_search2 == -1) {
         cout << "Value 13 not found.\n";
     } else {
@@ -322,7 +353,7 @@ int main () {
     print_separator();
 
     cout << "Improved linear search (move to front) for value 13:\n";
-    int the_search3 = improve_linear_seach_move_to_front(arr, 13);
+    int the_search3 = improve_linear_search_move_to_front(arr, 13);
     if (the_search3 == -1) {
         cout << "Value 13 not found.\n";
     } else {
@@ -397,6 +428,18 @@ int main () {
     display(ar);
 
     print_separator();
+
+    reverse_array (ar);
+
+    display (ar);
+
+    print_separator ();
+
+    cout << "Testing reverse_array_with_direct_swap function:\n";
+    reverse_array_with_direct_swap (ar);
+    display (ar);
+
+    print_separator ();
 
     delete[] arr.A;
     delete[] ar.A;
