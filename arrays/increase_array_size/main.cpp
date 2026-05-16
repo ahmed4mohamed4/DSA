@@ -4,7 +4,6 @@ using namespace std;
 
 int main () {
 
-
     const int SIZE1 = 5, SIZE2 = 10;
 
     int *p = new int [SIZE1];
