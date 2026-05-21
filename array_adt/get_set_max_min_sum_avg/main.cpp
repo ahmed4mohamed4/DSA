@@ -13,11 +13,16 @@ bool is_valid_index (const Array &arr, int index) {
     return index >= 0 && index < arr.length;
 }
 
-void display (Array &arr) {
-    for (int i = 0; i < arr.length; i++) { // O(n)
-        cout << arr.A [i] << " ";
+void display (const Array &arr) {
+    cout << "array: ";
+    if (arr.length) {
+        for (int i = 0; i < arr.length; i++) {
+            cout << arr.A [i] << ' ';
+        } cout << '\n';
     }
-    cout << endl;
+    else {
+        cout << "Empty!\n";
+    }
 }
 
 int get (const Array &arr, const int index) {

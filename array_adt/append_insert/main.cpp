@@ -8,11 +8,16 @@ struct Array {
     int length;
 };
 
-void display (Array &arr) {
-    for (int i = 0; i < arr.length; i++) { // O(n)
-        cout << arr.A [i] << " ";
+void display (const Array &arr) {
+    cout << "array: ";
+    if (arr.length) {
+        for (int i = 0; i < arr.length; i++) {
+            cout << arr.A [i] << ' ';
+        } cout << '\n';
     }
-    cout << endl;
+    else {
+        cout << "Empty!\n";
+    }
 }
 
 void append (Array &arr, const int element) {
