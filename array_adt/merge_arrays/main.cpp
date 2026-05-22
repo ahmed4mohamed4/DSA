@@ -21,7 +21,7 @@ void display (const Array &arr) {
 }
 
 // (arr1, arr2) -> need to merge
-struct Array merge (Array &arr1, Array &arr2) {
+struct Array merge (const Array &arr1, const Array &arr2) {
     int i = 0, j = 0, k = 0;
     int n = arr1.length, m = arr2.length;
     
