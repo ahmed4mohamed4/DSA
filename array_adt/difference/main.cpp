@@ -84,7 +84,7 @@ struct Array difference_sorted_arrays (const Array &arr1, const Array &arr2) {
     arr3.length = k;
     return arr3;
 }
-
+ 
 int main () {
     
     Array arr1 {new int [5] {3, 5, 10, 4, 6}, 5, 5};
