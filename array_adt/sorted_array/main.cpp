@@ -92,6 +92,8 @@ int main () {
     negative_left_positive_right (arr);
     
     display (arr);
+
+    delete [] arr.A;
     
     return 0;
 }

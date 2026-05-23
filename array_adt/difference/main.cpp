@@ -64,7 +64,7 @@ struct Array difference_sorted_arrays (const Array &arr1, const Array &arr2) {
     Array arr3;
     arr3.size = arr1.size;
     arr3.length = k;
-    arr3.A = new int [arr3.size] {};
+    arr3.A = new int [arr3.size];
 
     while (i < n && j < m) {
 
@@ -104,6 +104,10 @@ int main () {
     arr6 = difference_sorted_arrays (arr4, arr5);
 
     display (arr6);
+
+    delete [] arr1.A;
+    delete [] arr2.A;
+    delete [] arr3.A; 
     
     return 0;
 }

@@ -69,5 +69,9 @@ int main () {
 
     display (arr3);
 
+    delete [] arr1.A;
+    delete [] arr2.A;
+    delete [] arr3.A;
+
     return 0;
 }
