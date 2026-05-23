@@ -92,7 +92,7 @@ int main () {
     Array arr5 {new int [5] {2, 4, 5, 7, 12}, 5, 5};
     Array arr6 {new int [5] {}, 5, 0};
 
-    arr6 = intersection_not_sorted_arrays (arr4, arr5);
+    arr6 = intersection_sorted_arrays (arr4, arr5);
 
     display (arr6);
 

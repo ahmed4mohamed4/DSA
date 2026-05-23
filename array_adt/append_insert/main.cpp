@@ -47,7 +47,7 @@ void insert (Array &arr, const int index, const int v) {
         index <= arr.length &&
         arr.length < arr.size
     ) {
-       
+    
         for (int i = arr.length; i > index; --i) {
             arr.A [i] = arr.A [i - 1];
         }

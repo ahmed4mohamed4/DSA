@@ -68,7 +68,7 @@ void negative_left_positive_right (Array &arr) {
             i++;
         }
 
-        while (j >= 0 && arr.A [j] >= 0 && j >= 0) {
+        while (j >= 0 && arr.A [j] >= 0) {
             j--;
         }
 
@@ -85,11 +85,11 @@ int main () {
     Array arr;
     arr.size = 10;
     arr.length = 7;
-    arr.A = new int [arr.size] {-1, 2, 3, 4, -1, -2, 1};
+    arr.A = new int [arr.size] {7, 6, 5, 4, 3, 2, 1};
 
     display (arr);
     
-    negative_left_positive_right (arr);
+    cout << is_sorted (arr, false) << '\n';
     
     display (arr);
 

@@ -108,6 +108,10 @@ int main () {
     delete [] arr1.A;
     delete [] arr2.A;
     delete [] arr3.A; 
-    
+
+    delete [] arr4.A;
+    delete [] arr5.A;
+    delete [] arr6.A;
+
     return 0;
 }

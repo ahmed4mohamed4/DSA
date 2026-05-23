@@ -38,6 +38,8 @@ void reverse_array (Array &arr) { // O(2n) => O(n)
     for (int i = 0; i < arr.length; i++) {
         arr.A [i] = a.A [i];
     }
+
+    delete[] a.A;
 }
 
 void reverse_array_with_direct_swap (Array &arr) { // O(n)

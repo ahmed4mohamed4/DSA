@@ -135,7 +135,7 @@ int main () {
     
     arr6.size = 10;
     arr6.length = 10;
-    arr6.A = new int [arr3.size];
+    arr6.A = new int [arr6.size];
 
     arr6 = union_sorted_arrays (arr4, arr5);
 
