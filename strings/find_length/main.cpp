@@ -16,7 +16,9 @@ int main () {
     
     char s [10] = "Ahmed";
 
+    cout << s << '\n';
     cout << len_str (s) << '\n';
+
     
     return 0;
 }
