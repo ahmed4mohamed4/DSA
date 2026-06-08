@@ -3,63 +3,83 @@
 using namespace std;
 
 // Convert all the str to lower case
-string lower_case (string &s) {
-    
-    for (char &c : s) {
-        c += 'a' - 'A';
-        // c += 32;
-    }
+void lower_case (string &s) {
 
-    return s;
+    for (char &c : s) {
+        if (c >= 'A' && c <= 'Z') {
+            c += 'a' - 'A';
+            // c += 32;
+        }
+    }
 }
 
 // Convert all the str to upper case
-string upper_case (string &s) {
+void upper_case (string &s) {
     
     for (char &c : s) {
-        c -= 'a' - 'A';
-        // c -= 32;
+        if (c >= 'a' && c <= 'z') {
+            c -= 'a' - 'A';
+            // c -= 32;
+        }
     }
-
-    return s;
 }
 
 // Change the case:
 // - lower => upper
 // - upper => lower
-string change_case (string &s) {
+void change_case (string &s) {
     
     for (char &c : s) {
         if (c >= 'a' && c <= 'z') {
-            c -= 32;
+            c -= ('a' - 'A');
         }
         else if (c >= 'A' && c <= 'Z') {
-            c += 32;
+            c += ('a' - 'A');
         }
     }
     
-    return s;
 }
 
+int count_vowels (const string &s) {
+    int counter = 0;
 
+    for (char c : s) {
+        if (c >= 'A' && c <= 'Z') { // all to lower
+            c += ('a' - 'A');
+        }
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+            counter++;
+        }
+    }
+
+    return counter;
+}
 
 int main () {
-    
-    
+ 
     // A ==> 65
     // a ==> 97
-    
+
     // cout << 'a' - 'A' << '\n'; // 32 in ASCII code
 
     string name = "AHMED";
 
-    cout << "lower case: " << lower_case (name) << '\n';
+    lower_case (name);
+
+    cout << "lower case: " << name << '\n';
+
+    upper_case (name);
     
-    cout << "Upeer case: " << upper_case (name) << '\n';
+    cout << "Upper case: " << name << '\n';
 
     name = "Ahmed";
 
-    cout << "Change the case: " << change_case (name) << '\n';
+    change_case (name);
+
+    cout << "Change the case: " << name << '\n';
+
+    cout << "Number of vowels: " << count_vowels (name) << '\n';
     
     return 0;
 }
+
