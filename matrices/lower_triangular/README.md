@@ -2,12 +2,13 @@
 # Lower Triangular Matrix
     A type of square matrix where all the entries above the main diagonal are zero.
 Example:
-```matlab
-1 0 0
-2 3 0
-4 5 6
+```m
+1 0 0 0 0
+7 2 0 0 0
+3 4 8 0 0
+2 5 3 5 0
+1 1 9 3 6
 ```
-
 Properties:
 - matrix is square (number of rows = number of columns)
 

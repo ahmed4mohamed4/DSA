@@ -3,6 +3,45 @@
 
 using namespace std;
 
+// i and j start from 1
+class lowerTriangular {
+private:
+    int size;
+    int *A;
+public:
+
+    lowerTriangular (const int &n) {
+        this->size = n * (n + 1) / 2;
+        A = new int [size] {};
+    }
+
+    void set (int i, int j, const int &value) {
+        if (i >= j) {
+            int index = i * (i - 1) / 2 + j - 1;
+            A [index] = value;
+        }
+    }
+
+    int get (int i, int j) {
+        if (i >= j) {
+            int index = i * (i - 1) / 2 + j - 1;
+            return A [index];
+        }
+        return 0;
+    }
+
+    void display () {
+        for (int i = 0; i < this->size; i++) {
+            cout << A [i] << ' ';
+        } cout << "\n";
+    }
+
+    ~lowerTriangular () {
+        delete [] A;
+    }
+
+};
+
 int main () {
 
     const int N = 5;
@@ -28,6 +67,7 @@ int main () {
     }
 
     // Display
+    cout << "Row major: ";
     for (const int x : arr) {
         cout << x << ' ';
     } cout << '\n';
@@ -42,11 +82,38 @@ int main () {
         }
     }
 
-    
     // Display
+    cout << "Column major: ";
     for (const int x : arr) {
         cout << x << ' ';
     } cout << '\n';
+
+
+    // Using class
+    lowerTriangular lt (5);
+
+    lt.set (1,1,1);
+
+    lt.set (2,1,7);
+    lt.set (2,2,2);
+
+    lt.set (3,1,3);
+    lt.set (3,2,4);
+    lt.set (3,3,8);
+
+    lt.set (4,1,2);
+    lt.set (4,2,5);
+    lt.set (4,3,3);
+    lt.set (4,4,5);
+
+    lt.set (5,1,1);
+    lt.set (5,2,1);
+    lt.set (5,3,9);
+    lt.set (5,4,3);
+    lt.set (5,5,6); 
+
+    cout << "Using Class: ";
+    lt.display ();
 
     return 0;
 }
