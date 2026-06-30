@@ -37,5 +37,3 @@ Formula for column major order:
     index (i, j) = [n (j - 1) - (j - 2) * (j - 1) / 2] + (i - j)
 ![Column major order](./images/column_major_shape.png)
 
-
-<img src="./images/Calculating Figure It Out GIF.gif" alt="We got some math here 🙂" width="200"/>
