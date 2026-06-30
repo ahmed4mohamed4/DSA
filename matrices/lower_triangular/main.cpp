@@ -6,34 +6,47 @@ using namespace std;
 // i and j start from 1
 class lowerTriangular {
 private:
-    int size;
-    int *A;
+    int size; // 1D arr size
+    int *A; // 1D arr
+    int n; // Size of matrix
 public:
 
-    lowerTriangular (const int &n) {
-        this->size = n * (n + 1) / 2;
+    lowerTriangular (const int &n_) {
+        this->n = n_;
+        this->size = n_ * (n_ + 1) / 2;
         A = new int [size] {};
     }
 
     void set (int i, int j, const int &value) {
-        if (i >= j) {
+        if (i >= 1 && j >= 1 && i <= n && j <= n && i >= j) {
             int index = i * (i - 1) / 2 + j - 1;
             A [index] = value;
         }
     }
 
     int get (int i, int j) {
-        if (i >= j) {
+        if (i >= 1 && j >= 1 && i <= n && j <= n && i >= j) {
             int index = i * (i - 1) / 2 + j - 1;
             return A [index];
         }
         return 0;
     }
 
-    void display () {
-        for (int i = 0; i < this->size; i++) {
-            cout << A [i] << ' ';
-        } cout << "\n";
+    // void display () {
+    //     for (int i = 0; i < this->size; i++) {
+    //         cout << A [i] << ' ';
+    //     } cout << "\n";
+    // }
+
+    // Display the whole matrix [include 0s]
+    void display () { 
+        const int END = this->n;
+        for (int i = 1; i <= END; i++){
+            for (int j = 1; j <= END; j++) {
+                cout << (i < j ? 0 : get (i, j)) << ' ';
+            }
+            cout << '\n';
+        }
     }
 
     ~lowerTriangular () {
@@ -112,7 +125,7 @@ int main () {
     lt.set (5,4,3);
     lt.set (5,5,6); 
 
-    cout << "Using Class: ";
+    cout << "Using Class:\n";
     lt.display ();
 
     return 0;
