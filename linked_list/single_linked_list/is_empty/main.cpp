@@ -21,9 +21,10 @@ public:
         this->head = nullptr;
     }
 
-    bool is_empty () {
+    bool is_empty () const {
         return !head;
     }
+    
     ~linkedList () { // destructor
         Node *temp = head;
 
