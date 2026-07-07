@@ -26,10 +26,15 @@ public:
     - if it is empty : empty
     - else : display the whole linked list
     */
-    void display () {
+
+    bool is_empty () const {
+        return !head;
+    }
+
+    void display () const {
         cout << "Linked list: ";
 
-        if (head == nullptr) {
+        if (is_empty ()) {
             cout << "Empty\n";
             return;
         }
@@ -43,8 +48,6 @@ public:
         
         cout << '\n';
     }
-
-    
 
     ~linkedList () { // destructor
         Node *temp = head;
@@ -60,14 +63,12 @@ public:
 int main () {
     
     linkedList linked_list_1;
-    linkedList linked_list_2;
 
     linked_list_1.head = new Node (1);
     linked_list_1.head->ptr = new Node (2);
     linked_list_1.head->ptr->ptr = new Node (3);
 
     linked_list_1.display ();
-    linked_list_2.display ();
     
     return 0;
 }
