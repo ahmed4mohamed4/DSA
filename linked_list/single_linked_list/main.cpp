@@ -1,8 +1,13 @@
-
 #include <iostream>
 
 using namespace std;
 
+/* 
+# Node
+## for single linked list
+- Value : int -> default = 0
+- ptr for next node : Node -> default = nullptr
+*/
 class Node {
 public:
     int value;
@@ -13,6 +18,11 @@ public:
     }
 };
 
+/* # Single Linked list class
+    - head : Node -> default = nullptr
+    - is_empty () : bool -> check if the linked list is empty or not
+    - display () : void -> display the whole linked list
+*/
 class linkedList {
 public:
     Node *head;
@@ -21,8 +31,54 @@ public:
         this->head = nullptr;
     }
 
-    bool is_empty () const {
+    bool is_empty () const { // check if the linked list is empty or not
         return !head;
+    }
+
+    void display () const { // display the whole linked list
+        cout << "Linked list: ";
+
+        if (is_empty ()) {
+            cout << "Empty\n";
+            return;
+        }
+
+        Node *temp = head;
+
+        while (temp) {
+            cout << temp->value << ' ';
+            temp = temp->ptr;
+        }
+        
+        cout << '\n';
+    }
+    
+    int len () const { // return the length of the linked list
+        int counter = 0;
+
+        Node *temp = head;
+
+        while (temp) {
+            counter++;
+            temp = temp->ptr;
+        }
+        
+        return counter;
+    }
+
+    int sum () { // return the sum of all elements in the linked list
+        
+        int result = 0;
+
+        Node *temp = head;
+
+        while (temp) {
+            result += temp->value;
+            temp = temp->ptr;
+        }
+
+        return result;
+
     }
 
     int max () const { // find the max element in linked list and return 0 if the linked list is empty
@@ -70,14 +126,7 @@ public:
 
 int main () {
     
-    linkedList linked_list_1;
-
-    linked_list_1.head = new Node (12);
-    linked_list_1.head->ptr = new Node (42);
-    linked_list_1.head->ptr->ptr = new Node (23);
-
-    cout << "Max: " << linked_list_1.max () << endl;
-    cout << "Min: " << linked_list_1.min () << endl;
-
+    
+    
     return 0;
 }
