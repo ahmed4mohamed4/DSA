@@ -255,6 +255,36 @@ public:
         given_node->ptr = new_node;
     }
 
+    void insertAtPosition (const int &value, const int &pos) { // Insert a new node with the given value at the specified position (start from 1) in the linked list
+        if (pos < 1 || pos > len () + 1) {
+            cout << "Out of range\n";
+            return;
+        }
+
+        if (pos == 1) {
+            insertFront (value);
+            return;
+        }
+
+        // head -> A -> B -> C -> D -> nullptr
+        Node *temp = head;
+        int counter = 1;
+        Node *new_node = new Node (value);
+
+        while (temp && counter < pos - 1) {
+            temp = temp->ptr;
+            counter++;
+        }
+
+        if (!temp) {
+            return;
+        }
+
+        new_node->ptr = temp->ptr;
+        temp->ptr = new_node;
+
+    }
+
     ~linkedList () { // destructor
         Node *temp = head;
 
@@ -305,6 +335,34 @@ int main () {
     // Test insertBack
     cout << "Testing insertBack (25): ";
     linked_list.insertBack (25);
+    linked_list.display ();
+
+    // Test insertAfterGivenValue
+    cout << "Testing insertAfterGivenValue (10, 12): ";
+    linked_list.insertAfterGivenValue (10, 12);
+    linked_list.display ();
+
+    // Test insertAfterGivenNode
+    cout << "Testing insertAfterGivenNode (node with value 15, 17): ";
+    Node *node_15 = linked_list.search (15);
+    linked_list.insertAfterGivenNode (node_15, 17);
+    linked_list.display ();
+
+    // Test insertAtPosition
+    cout << "Testing insertAtPosition (100 at pos 1): ";
+    linked_list.insertAtPosition (100, 1);
+    linked_list.display ();
+
+    cout << "Testing insertAtPosition (110 at pos 3): ";
+    linked_list.insertAtPosition (110, 3);
+    linked_list.display ();
+
+    cout << "Testing insertAtPosition (120 at end): ";
+    linked_list.insertAtPosition (120, linked_list.len () + 1);
+    linked_list.display ();
+
+    cout << "Testing insertAtPosition (999 at out of range pos 100): ";
+    linked_list.insertAtPosition (999, 100);
     linked_list.display ();
 
     return 0;
