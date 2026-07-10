@@ -22,6 +22,13 @@ public:
     - head : Node -> default = nullptr
     - is_empty () : bool -> check if the linked list is empty or not
     - display () : void -> display the whole linked list
+    - len () : int -> return the length of the linked list
+    - sum () : int -> return the sum of all elements in the linked list
+    - max () : int -> find the max element in linked list and return 0 if the linked list is empty
+    - min () : int -> find the min element in linked list and return 0 if the linked list is empty
+    - contains (const int &target) : bool -> search for a value in the linked list and return true if found, false otherwise
+    - search (const int &target) : Node* -> Return a pointer to the node if found, otherwise return nullptr.
+    - searchMTF (const int &target) : Node* -> Search for a node. If found, move it to the front and return its pointer. Otherwise, return nullptr.
 */
 class linkedList {
 public:
@@ -113,6 +120,55 @@ public:
         return min_value;
     }
 
+    bool contains (const int &target) const { // search for a value in the linked list and return true if found, false otherwise
+        Node *temp = head;
+
+        while (temp) {
+            if (temp->value == target) {
+                return true;
+            }
+            temp = temp->ptr;
+        }
+
+        return false;
+    }
+
+    Node* search (const int &target) const { // Return a pointer to the node if found, otherwise return nullptr.
+        Node *temp = head;
+
+        while (temp) {
+            if (temp->value == target) {
+                return temp;
+            }
+            temp = temp->ptr;
+        }
+
+        return nullptr;
+    }
+
+    Node* searchMTF (const int &target) { // Search for a node. If found, move it to the front and return its pointer. Otherwise, return nullptr.
+        Node *temp = head;
+        Node *prev = nullptr;
+
+        while (temp) {
+            if (temp->value == target) {
+                if (!prev) { // already at front
+                    return temp;
+                }
+                prev->ptr = temp->ptr;
+                temp->ptr = head;
+                head = temp;
+                return temp;
+            }
+            prev = temp;
+            temp = temp->ptr;
+        }
+
+        return nullptr;
+    }
+
+    
+
     ~linkedList () { // destructor
         Node *temp = head;
 
@@ -125,8 +181,6 @@ public:
 };
 
 int main () {
-    
-    
     
     return 0;
 }
