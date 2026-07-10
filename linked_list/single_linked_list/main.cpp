@@ -64,6 +64,9 @@ public:
  * 
  * @method insertAfterGivenNode(Node *given_node, const int &value) : void
  *        Insert a new node with the given value after the specified node
+ * 
+ * @method insertAtPosition(const int &value, const int &pos) : void
+ *        Insert a new node with the given value at the specified position (starting from 1) in the linked list
  */
 class linkedList {
 private:
@@ -282,6 +285,65 @@ public:
 
         new_node->ptr = temp->ptr;
         temp->ptr = new_node;
+
+    }
+
+    void deleteFront () {
+
+        if (is_empty ()) {
+            return;
+        }
+        // head -> A -> B -> C -> D -> nullptr
+        Node *temp = head;
+        head = head->ptr;
+        delete temp;
+    }
+
+    void deleteBack () {
+        if (is_empty ()) {
+            return;
+        }
+        
+        if (!head->ptr) { // 1 node
+            Node *temp = head;
+            head = nullptr;
+            delete temp;
+            return;
+        }
+
+        // head -> A -> B -> C -> D -> nullptr
+        Node *temp = head;
+        while (temp->ptr->ptr) {
+            temp = temp->ptr;
+        }
+
+        Node *node_to_delete = temp->ptr;
+        temp->ptr = nullptr;
+        delete node_to_delete;
+    }
+
+    // void deleteByValue (const int &value) {
+    //     if (is_empty ()) {
+    //         return;
+    //     }
+
+    //     // head -> A -> B -> C -> D -> nullptr
+    //     Node *temp = head;
+    //     Node *prev = nullptr;
+
+    //     while (temp) {
+    //         if (temp->value == value) {
+    //            break; 
+    //         }
+    //         prev = temp;
+    //         temp = temp->ptr;
+    //     }
+
+    //     Node *node_to_delete = prev->ptr;
+    //     prev->ptr = prev->ptr->ptr;
+    // }
+
+    void deleteByPosition () {
 
     }
 
