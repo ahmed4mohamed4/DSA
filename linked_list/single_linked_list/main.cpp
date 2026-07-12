@@ -67,6 +67,18 @@ public:
  * 
  * @method insertAtPosition(const int &value, const int &pos) : void
  *        Insert a new node with the given value at the specified position (starting from 1) in the linked list
+ * 
+ * @method deleteFront() : void
+ *        Delete the first node of the linked list
+ * 
+ * @method deleteBack() : void
+ *        Delete the last node of the linked list
+ * 
+ * @method deleteByValue(const int &value) : void
+ *       Delete the first occurrence of a node with the given value in the linked list
+ * 
+ * @method deleteByPosition(const int &pos) : void
+ *      Delete the node at the specified position (starting from 1) in the linked list
  */
 class linkedList {
 private:
@@ -288,7 +300,7 @@ public:
 
     }
 
-    void deleteFront () {
+    void deleteFront () { // Delete the first node of the linked list
 
         if (is_empty ()) {
             return;
@@ -299,7 +311,7 @@ public:
         delete temp;
     }
 
-    void deleteBack () {
+    void deleteBack () { // Delete the last node of the linked list
         if (is_empty ()) {
             return;
         }
@@ -322,7 +334,7 @@ public:
         delete node_to_delete;
     }
 
-    void deleteByValue (const int &value) {
+    void deleteByValue (const int &value) { // Delete the first occurrence of a node with the given value in the linked list
         if (is_empty ()) {
             return;
         }
@@ -352,7 +364,7 @@ public:
         delete node_to_delete;
     }
 
-    void deleteByPosition (const int &pos) {
+    void deleteByPosition (const int &pos) { // Delete the node at the specified position (start from 1) in the linked list
         if (is_empty ()) { // empty
             return;
         }
