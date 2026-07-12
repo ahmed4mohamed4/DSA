@@ -322,28 +322,64 @@ public:
         delete node_to_delete;
     }
 
-    // void deleteByValue (const int &value) {
-    //     if (is_empty ()) {
-    //         return;
-    //     }
+    void deleteByValue (const int &value) {
+        if (is_empty ()) {
+            return;
+        }
 
-    //     // head -> A -> B -> C -> D -> nullptr
-    //     Node *temp = head;
-    //     Node *prev = nullptr;
+        // head -> A -> B -> C -> D -> nullptr
+        Node *temp = head;
+        Node *prev = nullptr;
 
-    //     while (temp) {
-    //         if (temp->value == value) {
-    //            break; 
-    //         }
-    //         prev = temp;
-    //         temp = temp->ptr;
-    //     }
+        while (temp && temp->value != value) { 
+            prev = temp;
+            temp = temp->ptr;
+        }
 
-    //     Node *node_to_delete = prev->ptr;
-    //     prev->ptr = prev->ptr->ptr;
-    // }
+        if (!temp) { // not found
+            return;
+        }
 
-    void deleteByPosition () {
+        if (prev == nullptr) { // value in the  first node
+            Node *node = head;
+            head = head->ptr;
+            delete node;
+            return;
+        }
+
+        Node *node_to_delete = temp;
+        prev->ptr = temp->ptr;
+        delete node_to_delete;
+    }
+
+    void deleteByPosition (const int &pos) {
+        if (is_empty ()) { // empty
+            return;
+        }
+
+        Node *temp = head;
+        if (pos == 1) { // one node
+            head = head->ptr;
+            delete temp;
+            return;
+        }
+
+        // head -> A -> B -> C -> D -> nullptr
+        int counter = 1;
+        Node *prev = nullptr;
+        while (temp && counter < pos) {
+            prev = temp;
+            temp = temp->ptr;
+            counter++;
+        }
+
+        if (!temp) { // not found
+            return;
+        }
+
+        Node *node_to_delete = temp;
+        prev->ptr = temp->ptr;
+        delete node_to_delete;
 
     }
 
@@ -358,6 +394,10 @@ public:
     }
 };
 
+
+void printSeparator () {
+    cout << "----------------------------------------\n";
+}
 
 int main () {
     linkedList linked_list;
@@ -380,6 +420,8 @@ int main () {
         cout << "Contains " << t << "? " << (linked_list.contains (t) ? "Yes" : "No") << '\n';
     }
 
+    printSeparator ();
+
     // search
     Node *found = linked_list.search (10);
     cout << "search (10): " << (found ? to_string (found->value) : string ("not found")) << '\n';
@@ -389,6 +431,8 @@ int main () {
     Node *moved = linked_list.searchMTF (15);
     cout << "searchMTF (15) returned: " << (moved ? to_string (moved->value) : string ("not found")) << '\n';
     cout << "After searchMTF (15): "; linked_list.display ();
+
+    printSeparator ();
 
     // Test insertFront
     cout << "\nTesting insertFront (3): ";
@@ -427,6 +471,39 @@ int main () {
     cout << "Testing insertAtPosition (999 at out of range pos 100): ";
     linked_list.insertAtPosition (999, 100);
     linked_list.display ();
+
+    printSeparator ();
+
+    // Test deleteByValue
+    cout << "Testing deleteByValue (5): ";
+    linked_list.deleteByValue (5);
+    linked_list.display ();
+
+    cout << "Testing deleteByValue (120): ";
+    linked_list.deleteByValue (120);
+    linked_list.display ();
+
+    cout << "Testing deleteByValue (999): ";
+    linked_list.deleteByValue (999);
+    linked_list.display ();
+    // Test deleteByPosition
+    cout << "Testing deleteByPosition (1): ";
+    linked_list.deleteByPosition (1);
+    linked_list.display ();
+
+    cout << "Testing deleteByPosition (2): ";
+    linked_list.deleteByPosition (2);
+    linked_list.display ();
+
+    cout << "Testing deleteByPosition (at end): ";
+    linked_list.deleteByPosition (linked_list.len ());
+    linked_list.display ();
+
+    cout << "Testing deleteByPosition (out of range 100): ";
+    linked_list.deleteByPosition (100);
+    linked_list.display ();
+
+    printSeparator ();
 
     return 0;
 }
